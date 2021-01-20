@@ -1,0 +1,46 @@
+<!-- *ngIf="value" -->
+<div class="progress-container">
+  <div class="progress-bar" id="scrollBar"></div>
+  </div>
+
+<div class="container">
+    
+  <div class="row">
+    <div class="col-xs-12">
+
+  <ngb-carousel style="margin-top: 64px;">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper" style="width: 100%;">
+            <img src="./assets/images/carousel1.jpg" alt="Random first slide" class="imagedivr" style="width: 100%;">
+          </div>
+         
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper" style="width: 100%;">
+            <img src="./assets/images/carousel1.jpg" alt="Random first slide" class="imagedivr" style="width: 100%;">
+          </div>
+         
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper" style="width: 100%;">
+            <img src="./assets/images/carousel1.jpg" alt="Random first slide"  class="imagedivr" style="width: 100%;">
+          </div>
+       
+        </ng-template>
+      </ngb-carousel>
+    
+      
+    </div>
+  </div>
+
+
+</div>
+
+<!-- && (value == true) -->
+<div class="container alert"  *ngIf="(alertbtn == true)">
+  <span > Hello Diwali sale is coming soon get ready with your savings..</span>
+  <span class="alert-icon" (click)="alertmethod()">&times;</span>
+</div> 
+
+
+

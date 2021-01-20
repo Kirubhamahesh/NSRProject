@@ -1,0 +1,55 @@
+
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+      }
+      
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .closebtn:hover {
+        color: black;
+      }
+
+      .animationeffect
+      {
+        bottom: 0px;
+        right: 0px;
+        position: fixed;
+        margin: 30px;
+        font-size:24px;
+        color: white;
+        /* animation:faddindown 1.2s; */
+      }
+
+     
+
+        @keyframes faddindown{
+          10% { opacity: 0; transform: translateY(-20px);}
+          100% { opacity: 1; transform: translateY(0px);}  }
+      
+.page-headeranimate{
+  animation:faddindown 1.2s;
+}
+
+.animation{
+  animation: fadeInDown  1.5s;
+  }
+  @keyframes fadeInDown {
+  0% {
+  opacity: 0;
+  transform: translateY(-20px)
+  }
+  100% {
+  opacity: 1;
+  transform: translateY(0) }
+  }

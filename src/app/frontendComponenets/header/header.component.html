@@ -1,0 +1,26 @@
+
+ <header class="page-header" [ngClass]="{'animation fadeInDown':animation}">
+  <nav class="nav-group nav-group-res">
+    <a class="nav-items "[ngClass]="{'nav-items-res':toggle}" (click)="gotohome()">
+       <div class="nav-logo d-block d-md-none">
+        <img src="./assets/images/logoc.jpeg" style="width: 100%; margin-right: 20px;" (click)=" gotohome()">
+       <!-- <span class="mobview"></span> --> {{activelink}}
+      </div>
+      <div class="nav-logo d-none d-md-block">
+        <img src="./assets/images/logoc.jpeg" style="width: 100%; margin-right: 20px;" (click)=" gotohome()">
+      </div>
+      </a>
+    <!-- <a class="nav-items nav-items-res" (click)="gotohome()"> <h5 style="color: white; margin:0">NSR</h5> </a> -->
+    <a class="nav-items" [ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'womens'}"    (click)="setStyle('women')" > Womens</a>
+    <a class="nav-items" [ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'mens'}"  (click)="setStyle('men')"> Mens</a>
+    <a class="nav-items "[ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'kids'}"  (click)="setStyle('kid')"> Kids </a>
+    <!-- <div class="nav-right-group">
+        <a class="nav-items" [ngClass]="{'nav-items-res':toggle}" (click)="aboutusscroll()"> About Us</a>
+    </div> -->
+  </nav>
+  <div class="menu">
+      <i class="material-icons menu-icon nav-items"  *ngIf="!toggle"(click)="showMenu()" tabindex="0">menu</i>
+      <i class="material-icons close-icon nav-items" *ngIf="toggle"(click)="showMenu()"tabindex="0">close</i> 
+  </div>
+
+</header>

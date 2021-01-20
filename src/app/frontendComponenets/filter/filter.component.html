@@ -1,0 +1,91 @@
+
+<div class="filter-block">
+  <button (click)="openFilter()" *ngIf="!clearbtn" class="filter-btn">  
+    <img src="./assets/images/icon.png"  class="filter-image"> Filter</button>
+    <button (click)="clearFilter()" *ngIf="clearbtn" class="filter-btn">  
+      <img src="./assets/images/icon.png"  class="filter-image"> clear Filter</button>
+  </div>
+   
+  
+<ng-template #content let-modal >
+    <div class="modal-header">
+       <div class="filter-text">
+        <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+       </div>
+        <button type="button" class="close" aria-label="Close" (click)="detailClose()" style="outline: none;">
+          <span aria-hidden="true" style="border: none; color: white;">&times;</span>
+        </button>
+      </div>
+   <div class="modal-body">
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="item-block"  *ngFor="let item of FilterTypeProd let i = index">
+            <input type="checkbox" id='content-{{i}}' [(ngModel)]=item.status (click)="selectedProdByType(item)">
+            <label for='content-{{i}}' > {{ item.content }}</label>
+          </div> 
+        </div>
+
+        <div class="col-md-6">
+          
+          <div class="price-slider">
+
+            <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
+            
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ dropdatamin }}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <div  *ngFor="let item of dropdownone" (click)="selectedprice(item)">
+                    <button ngbDropdownItem
+                   
+                    > {{item}} </button>
+                  </div>
+                  
+                </div>
+                </div>
+                
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ dropdatamax }}</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <div  *ngFor="let item of dropdowntwo" (click)="selectedprice(item)">
+                    <button ngbDropdownItem
+                   
+                    > {{item}} </button>
+                  </div>
+                  
+                </div>
+                </div>
+               
+            
+            <input value="150"
+            formControlName="rangeone"
+            (click)="selectrange($event,'min')"
+            min="150" max="650" step="50" type="range"/>
+            
+            <input value="650" 
+            formControlName="rangetwo"
+            (click)="selectrange($event,'max')"
+            min="150" max="650" step="50" type="range"/>
+            
+            
+            </form> 
+            </div>
+
+        </div>
+        
+        
+      </div>
+    </div>   
+
+
+   </div>
+
+   <div class="modal-footer">
+    <button  class="btn cancel-btn" (click)="detailClose()">Cancel</button>
+    <button class="btn apply-btn" (click)="filterApply()">Apply</button>
+  </div>
+
+  
+  </ng-template>

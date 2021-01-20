@@ -1,0 +1,98 @@
+ 
+ <ng-template #content let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Product detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="detailclose()" style="outline: none;">
+      <span aria-hidden="true" style="border: none;">&times;</span>
+    </button>
+  </div>
+ <div class="modal-body">
+  <div class="container overalldiv" *ngIf="overallcontent">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="imagediv">
+                    <img [src]="data?.image" class="image">
+    
+                </div>
+            </div>
+           
+              <div class="col-md-6" *ngIf="!enableform">
+                <!-- <h4 style="color: gray;">Try this</h4> -->
+                <h5 style="color: blue; margin-top: 10px;"> {{ data?.name }}</h5>
+                <h5> price :  {{ data?.estimatedprice }}  <span  style="margin-left: 10px; color: blue; font-size: small;"><s>{{ data?.price }}</s></span></h5> <span style="color: blue">59% off</span> 
+                <h5> Description : {{ data?.description }} </h5>
+                <h5> Model :  {{data?.clothtype}} </h5>
+                <h5> Color :  {{ data?.color }} </h5> 
+                <h5 style="color: green">Special price ends in 
+                  <span id="timer">  </span></h5>  
+             <h5>Free home delivery for bulk orders</h5>
+          <button class="btn btn-warning" (click)="order()"> Place order </button>   
+          </div>
+
+
+          <div class="col-md-6" *ngIf="enableform">
+
+            <div  style="display: flex; justify-content: flex-end;">
+              <button class="btn btn-primary"  (click)="order()" dis> Previous</button>
+            </div> 
+         
+            <h5 style="color: blue; margin-top: 10px;"> {{ data?.name }}</h5>
+            <h5> price :  {{ data?.estimatedprice }}  <span  style="margin-left: 10px; color: blue; font-size: small;"><s>{{ data?.price }}</s></span></h5> <span style="color: blue">59% off</span> 
+           
+
+           
+                   <form  [formGroup]="postForm">
+           
+                       <div class="form-group">
+                           <label for="exampleInputEmail1">Email address</label>
+                           <input type="email" class="form-control"  placeholder="Enter email" formControlName="email">
+                          </div>
+                         <div class="form-group">
+                           <label for="exampleInputEmail1">Contact number</label>
+                           <input type="email" class="form-control"  placeholder="Enter number" formControlName="number">
+                         </div>
+                      
+           
+                       <div class="form-group">
+                           <div ngbDropdown class="d-inline-block">
+                             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Quantity</button>
+                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                               <button ngbDropdownItem>1</button>
+                               <button ngbDropdownItem>2</button>
+                               <button ngbDropdownItem>3</button>
+                               <button ngbDropdownItem>4</button>
+                               <button ngbDropdownItem>5</button>
+                               <button ngbDropdownItem>6</button>
+                             </div>
+                           </div>
+                           <button type="submit" class="btn btn-primary d-inline-block " style="margin-left: 30px;">Submit</button>
+                       </div>
+                        
+           
+                    
+                     </form>
+                 
+      </div>
+
+
+      
+    
+    </div>
+  
+  </div>
+</div>
+
+
+
+  <div *ngIf="orderbtn" style="clear: fix;" class="animateleft">   
+   <app-orderinstruction></app-orderinstruction> 
+       </div>
+    
+
+
+</div>
+
+
+</ng-template>

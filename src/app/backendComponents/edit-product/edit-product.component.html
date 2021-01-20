@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="detail-right"> 
+     <div class="form-group">
+       <h3 class="Form-heading"> Add Warehouse details </h3>
+         <form [formGroup]="postForm" (ngSubmit)="onSavePost()">
+
+                 <label for="name" class="label-heading">Product name</label>
+                 <input type="text"  id="name" class="form-control" formControlName="image"/>
+                 <label for="imagePath" class="label-heading">Product type</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="type"/>
+
+                 <button mat-stroked-button type="button" (click)="filepicker.click()">
+                  Pick Image
+                </button>
+                <input type="file" #filepicker (change)="onImagePicked($event)"/>
+              
+              <div class="image-preview" *ngIf="imagePreview && postForm.get('image').valid">
+                  <img [src]="imagePreview" [alt]="postForm.value.name">
+              </div>
+
+
+                 <label for="imagePath" class="label-heading">Product price</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="price"/>
+                 <label for="imagePath" class="label-heading">Product estimatedprice</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="estimatedprice"/>
+                 <label for="imagePath" class="label-heading">Product clothtype</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="clothtype"/>
+                 <label for="imagePath" class="label-heading">Product description</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="description"/>
+                 <label for="imagePath" class="label-heading">Product color</label>
+                 <input type="text" id="imagePath" class="form-control" formControlName="color"/>   
+                 <!-- <label for="name" class="label-heading">Product id</label>
+                 <input type="text"  id="name" class="form-control" formControlName="id"/> -->
+                 <label for="name" class="label-heading">Product extrainfo</label>
+                 <input type="text"  id="name" class="form-control" formControlName="extrainfo"/>
+                 <label for="name" class="label-heading">Product fabric</label>
+                 <input type="text"  id="name" class="form-control" formControlName="fabric"/>
+                 <button class="btnclass" 
+                 type="submit"
+                 [disabled]="!postForm.valid" >
+                 Save
+               </button>
+             </form>
+            </div>
+           </div>
+         </div>
+
+ 

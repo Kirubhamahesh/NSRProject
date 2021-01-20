@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<app-carousel></app-carousel>
+
+
+
+<app-data-list></app-data-list>
+<!-- *ngIf="datadetail" -->
+<app-data-detail [detail]="detailcont" *ngIf="datadetail" (closedetail)="closecomp()"></app-data-detail>
+
+
+<!-- 
+<app-footer></app-footer> -->
+
+
+<!-- <div class="btn btn-warning animationeffect" [ngClass]="{'animation fadeInDown':animation}" *ngIf="value"(click)="gototop()"> <span class="material-icons">
+  keyboard_arrow_up
+  </span> </div> -->
+

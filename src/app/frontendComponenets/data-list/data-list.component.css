@@ -1,0 +1,155 @@
+.filter-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.filter-btn {
+  display: block;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  border:none;
+  outline: none;
+  padding: 8px 16px;
+  color: black !important;
+  margin-top: 25px;
+}
+
+.filter-block {
+  /* display: flex;
+  justify-content: space-between; */
+  display: block;
+  margin-top: 35px;
+  /* float: right; */
+  right: 20px;
+  position: absolute; 
+}
+
+
+.placeorderbtn
+{
+  background: linear-gradient(135deg, #1a9be6, #1a57e6);
+  transform: translateZ(40px);
+  transform-style: preserve-3d;
+  transition: 300ms ease;
+  /* border-radius: 50px; */
+}
+.cards:hover
+{
+    border-left: none;
+    /* transform: translateZ(40px); */
+    /* text-transform: uppercase; */
+    /* box-shadow: 3.5px 3.5px  3.5px 3.5px gray; */
+}
+
+.cards
+{
+    box-shadow: 1px 1.5px  1px 1px lightgray;
+    
+    /* border: 1px solid black; */
+    padding: 20px 40px;
+    margin: 20px;
+    
+    background-color: #ecf0f1 ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+   
+
+}
+.image
+{
+    width: 100%;
+    height: 230px;
+    /* border-left: none;background-size: 200%;
+    background-position: 25% 20%; */
+}
+.imagediv
+{
+    text-align: center;
+    overflow: hidden; 
+    transition: 0.5s all ease-in-out; 
+}
+
+.imagediv :hover
+{
+  transform: scale(1.5); 
+}
+
+.bodystyle
+{
+  margin-top: 14px;
+}
+
+a:hover
+{
+    box-shadow: 2px 2.5px  2px 2px lightgray;
+}
+
+
+.icon-bar {
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    z-index: 9999;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+  .facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .youtube {
+    background: #bb0000;
+    color: white;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .icon-bar {
+       display: none;
+    }   }
+
+  .top-right {
+    transition: none;
+    transform: none;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color:red;
+    color:white;
+    margin: 30px;
+    width: 60px;
+    padding: 4px;
+    height: 35px;
+    border-radius: 30px 30px 30px 30px;
+  }

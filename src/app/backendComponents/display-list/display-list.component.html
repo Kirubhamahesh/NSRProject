@@ -1,0 +1,33 @@
+<div class="bodystyle" >
+
+   
+  
+    <div class="container " style="background-color: lightgray;">
+      
+        <div class="row">
+  
+          <div class="col-sm-12 col-md-12 col-lg-12 division" *ngFor="let item of requiredProducts">
+        
+            <div class="cards">
+                <div class="row">
+                    <div class="col-md-6">
+                       <div class="imagediv"> <img [src]="item.image"  class="image" alt="{{ item.name}}">
+                           <!-- <div class="top-right" *ngIf="item.extrainfo">offer</div> -->
+                         </div>
+                    </div>
+                    <div class="col-md-6">
+                       <h5>Product name : {{ item.name}}</h5>
+                       <h6>Product price : {{ item.estimatedprice }}</h6> 
+                       <h6> Description : {{ item.description}}</h6>
+                       <h6> Cloth type : {{ item.clothtype }}</h6> 
+                       <h6> Color : {{ item.color }}</h6> 
+                        <button class="btn btn-primary" style="margin-left: 20px;" (click)="editproduct(item.id,item.type)">Update</button>
+                        <button class="btn btn-warning" style="margin-left: 120px;">Delete</button>
+                   </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+  
+    

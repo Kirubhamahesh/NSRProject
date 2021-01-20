@@ -1,0 +1,92 @@
+.prevbtn
+{
+  right: 0px;
+  top: 0px;
+}
+.image
+{
+   
+   width: 300px;
+   height: 350px;
+   
+}
+.overalldiv{
+   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+   /* background-color: lightgray; */
+  /* padding-top: 64px; */
+  padding: 55px;
+  /* font-family: Roboto,Arial,sans-serif; */
+  position: relative;
+  animation: animateleft 0.6s;
+}
+
+
+.animateleft{
+  position: relative;
+ animation: animateright 0.6s;
+}
+
+@keyframes animateleft {
+0% {
+  right: -400px;
+  opacity: 0;
+}
+100% {
+  right: 0;
+  opacity: 1;
+}
+}
+
+@keyframes animateright {
+  0% {
+    left: -400px;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+  }
+
+ .h5
+ {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+   color: black;
+   font-weight: bold;
+ }
+
+ @media only screen and (max-width: 767px) {
+  h4 , h5 ,span
+  {
+    font-size: 1.0rem;
+  }
+
+
+  .image
+{
+   box-shadow: 1px 1.5px  1px 1px lightgray;
+   width: 280px;
+   height: 280px;
+   
+}
+
+  .overalldiv{
+  padding: 5px; 
+margin: 0px;  }
+  .headfont
+  {
+    color: lightslategrey;
+  }
+  .close
+  {
+    outline: none!important;
+  }
+  /* .image
+  {
+   box-shadow: 1px 1.5px  1px 1px lightgray;
+   width: 300px;
+   height: 250px;
+   
+} */
+}
+ 
