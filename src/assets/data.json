@@ -114,7 +114,7 @@
             "type":"women",
             "fabric": "Cotton" ,
             "name": "Pinkish Round neck Full sleeve shirt (WRNFS01)",
-       	    "image": "http://localhost:3000/images/accountsummary.png-1611052127830.png" ,
+            "image": "./assets/images/girl1.jpg" ,
             "estimatedprice": "₹300",
             "price": "₹599",
             "description": "Pure Soft cotton , Machine washable",

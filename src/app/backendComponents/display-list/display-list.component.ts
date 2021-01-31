@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Dataservice } from 'src/app/data-service';
 import { PostsService } from 'src/app/posts/posts.service';
+import data from 'src/assets/data.json';
 @Component({
   selector: 'app-display-list',
   templateUrl: './display-list.component.html',
@@ -17,60 +18,61 @@ export class DisplayListComponent implements OnInit {
   private subscription: Subscription;
   private headsubscription: Subscription;
 
-  currentActive = 'Home';
-  x:number;
-  constructor(private postservice: PostsService,private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice){}
-  
-  currreq = 'women'
+  constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
+
+  currreq = 'womens'
   requiredProducts: any = [];
 
+  mensarray = []
+  womensarray = []
+  kidsarray = []
+
   ngOnInit(){
-
-    this.currentActive = 'NSR';
-  //   this.subscription = this.httpClient.get("assets/data.json").subscribe(data =>{
-  //   this.products = data;
-  // })
-      this.products = this.dataservice.getProducts();
-
-    this.postservice.getPosts().subscribe((value)=>
+  
+      this.postservice.getPosts().subscribe((value)=>
     {
-    //  this.requiredProducts = value.data
-     console.log("array ",this.requiredProducts)
+      this.products = value.data
+       console.log("getpost in data lis",this.products)
+
+
+      for(let i=0;i<this.products.length;i++)
+        {
+          if(this.products[i].type == 'men')
+          this.mensarray.push(this.products[i])
+          else if(this.products[i].type == 'women')
+          this.womensarray.push(this.products[i])
+          else if(this.products[i].type == 'kids')
+          this.kidsarray.push(this.products[i])
+        }
+      this.headsubscription = this.dataservice.getsideheaderStyle().subscribe((curvalue)=>
+        {
+          console.log("subscribed in data list",curvalue)
+          this.currreq = curvalue;
+    
+          if(this.currreq == 'men')
+          this.requiredProducts = this.mensarray
+          else if(this.currreq == 'womens')
+          this.requiredProducts = this.womensarray
+          else if(this.currreq == 'kid')
+          this.requiredProducts = this.kidsarray
+          console.log("requiredProducts",this.requiredProducts)
+          
+        })
     })
+  }
   
 
-    this.dataservice.getheaderStyle().subscribe((value)=>
-    {
-     
-      this.currreq = value
-      console.log("subscri",this.currreq)
-
-      if(this.currreq == 'Womens')
-      this.requiredProducts = this.products.dataobj.womens;
-      else if(this.currreq == 'Mens')
-      this.requiredProducts = this.products.dataobj.mens;
-      if(this.currreq == 'Kids')
-      this.requiredProducts = this.products.dataobj.kids;
-
-    })
-    
-    this.requiredProducts = this.products.dataobj.womens;
-
-
-
-   
-  }
-  editproduct(id,type)
+  editproduct(obj)
   {
-   
-    this.router.navigate(['update',id,type])
+    this.dataservice.seteditdata(obj)
+    this.router.navigate(['update'])
   }
 
   
   
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
    
    }
 

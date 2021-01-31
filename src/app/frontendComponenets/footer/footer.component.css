@@ -1,0 +1,27 @@
+.footerdiv 
+{
+    background-color:black;
+    padding: 20px 40px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    word-spacing: 2px;
+}
+.list
+{
+    background-color:black;
+    padding: 2px 4px;
+    color: white;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+span{
+    color: #00BFFF;
+    display:inline-block;
+    border-bottom:1px solid #00BFFF;
+    padding-bottom:2px;
+}
+hr{
+    color: #00BFFF;
+}
+
+

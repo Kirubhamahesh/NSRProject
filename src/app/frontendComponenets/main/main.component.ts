@@ -9,7 +9,7 @@ import { Dataservice } from 'src/app/data-service';
   styleUrls: ['./main.component.css'],
   providers: [NgbModalConfig, NgbModal]
 })
-export class MainComponent implements OnInit {
+export class MainComponent  {
 
   animation = false;
   value = false;
@@ -30,29 +30,12 @@ else
 }
 }
 
-datadetail = false
-detailcont: any
-    ngOnInit(): void {
-      this.dataservice.datadetail.subscribe(
-        ( value: { number: number; name: string; })=>
-        {
-          this.datadetail = true;
-          this.detailcont = value;
-          console.log("detail",this.datadetail)
-        })  
-     }
-    
-    
 
     gototop()
     {
       window.scrollTo(0,0);
     }
-    closecomp()
-    {
-      this.datadetail = false;
-      console.log("closed");
-    }
+   
     
   }
   

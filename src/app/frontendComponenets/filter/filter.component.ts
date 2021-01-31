@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { of, Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dataservice } from 'src/app/data-service';
+import { PostsService } from 'src/app/posts/posts.service';
 
 @Component({
   selector: 'app-filter',
@@ -44,13 +45,17 @@ export class FilterComponent implements OnInit , OnDestroy{
     temper = 0
    
 
+    
+  currreq = 'women'
+  requiredProducts: any = [];
 
-
-  constructor(private modalService: NgbModal,private dataservice: Dataservice) { }
+  constructor(private modalService: NgbModal,private dataservice: Dataservice,private postservice: PostsService) { }
  
 
   ngOnInit(): void {
 
+    this.FilterTypeProd = [...this.womensFilter]
+    
     this.subscription = this.dataservice.getheaderStyle().subscribe((value)=>
     {
       console.log("filter subs",value)
@@ -71,12 +76,16 @@ export class FilterComponent implements OnInit , OnDestroy{
     {
       this.duplicateFilterarray = value
     })
+
+   
+
     
    }
 
   detailClose()
   {
     this.modalService.dismissAll();
+    this.clearbtn = !this.clearbtn
   }
   
   openFilter()
@@ -119,7 +128,7 @@ export class FilterComponent implements OnInit , OnDestroy{
   console.log("final arr",this.FinalFilterarray);
   this.dataservice.setFilteredDatas(this.FinalFilterarray);
   this.modalService.dismissAll();
-
+  this.duplicateFilterarray = []
   }
 
   selectedProdByPrice(item)

@@ -1,4 +1,6 @@
- 
+
+
+
  <ng-template #content let-modal >
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Product detail</h4>
@@ -43,36 +45,34 @@
            
 
            
-                   <form  [formGroup]="postForm">
+                   <form  [formGroup]="orderForm" >
            
-                       <div class="form-group">
-                           <label for="exampleInputEmail1">Email address</label>
-                           <input type="email" class="form-control"  placeholder="Enter email" formControlName="email">
-                          </div>
+                   
                          <div class="form-group">
-                           <label for="exampleInputEmail1">Contact number</label>
-                           <input type="email" class="form-control"  placeholder="Enter number" formControlName="number">
+                           <label for="exampleInputEmail1">Enter mobile number</label>
+                           <input type="email" class="form-control"  placeholder="Enter number" formControlName="contactNumber">
                          </div>
                       
-           
-                       <div class="form-group">
-                           <div ngbDropdown class="d-inline-block">
-                             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Quantity</button>
-                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                               <button ngbDropdownItem>1</button>
-                               <button ngbDropdownItem>2</button>
-                               <button ngbDropdownItem>3</button>
-                               <button ngbDropdownItem>4</button>
-                               <button ngbDropdownItem>5</button>
-                               <button ngbDropdownItem>6</button>
-                             </div>
-                           </div>
-                           <button type="submit" class="btn btn-primary d-inline-block " style="margin-left: 30px;">Submit</button>
-                       </div>
+                         <div class="form-group">
+                          <label for="exampleInputEmail1">Enter your delivery address</label>
+                          <textarea  class="form-control"  placeholder="Enter address" formControlName="address">
+                            </textarea>
+                        </div>
+                     
+                         <div ngbDropdown class="d-inline-block">
+                          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Quantity</button>
+                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem *ngFor="let item of quantity" (click)="orderQuantity(item)">{{ item }}</button>
+                            
+                          </div> </div>
+                           <button type="submit" class="btn btn-primary d-inline-block " style="margin-left: 30px;" (click)="onSaveOrder()">Submit</button>
+                      
                         
            
                     
                      </form>
+
+                     
                  
       </div>
 

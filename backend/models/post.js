@@ -1,10 +1,7 @@
 const mongoose =require('mongoose')
 
 const postSchema=mongoose.Schema({
-    // title:{type:Number,required:true},
-    // content:{type:String,required:true},
-    // imagePath:{type:String,required:true},
-    // id:{type:String,required:true},
+    
     type:{type:String,required:true},
     name:{type:String,required:true},
    image:{type:String,required:true},
@@ -18,3 +15,6 @@ const postSchema=mongoose.Schema({
 })
 
 module.exports=mongoose.model("Post",postSchema)
+
+
+

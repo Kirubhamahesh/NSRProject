@@ -1,11 +1,12 @@
-<div class="container">
+<app-adminheader></app-adminheader>
+<div class="container edit-prod">
     <div class="detail-right"> 
      <div class="form-group">
-       <h3 class="Form-heading"> Add Warehouse details </h3>
+       <h3 class="Form-heading"> Product details form</h3>
          <form [formGroup]="postForm" (ngSubmit)="onSavePost()">
 
                  <label for="name" class="label-heading">Product name</label>
-                 <input type="text"  id="name" class="form-control" formControlName="image"/>
+                 <input type="text"  id="name" class="form-control" formControlName="name"/>
                  <label for="imagePath" class="label-heading">Product type</label>
                  <input type="text" id="imagePath" class="form-control" formControlName="type"/>
 

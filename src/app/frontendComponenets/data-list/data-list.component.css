@@ -153,3 +153,9 @@ a:hover
     height: 35px;
     border-radius: 30px 30px 30px 30px;
   }
+
+  .no-filter
+  {
+    text-align: center;
+    padding: 60px 240px;
+  }

@@ -1,5 +1,7 @@
 const express = require("express");
 const Post = require("../models/post");
+const Order = require("../models/order");
+
 const multer = require("multer");
 
 const router = express.Router();
@@ -45,7 +47,7 @@ router.post(
       color:req.body.color,
     });
     post.save().then(createdPost => {
-      console.log("createdPost",createdPost);x    
+      console.log("createdPost",createdPost); 
       res.status(201).json({
         message: "Post added successfully!",
         post: {
@@ -57,36 +59,72 @@ router.post(
   }
 );
 
+
+router.post(
+  "/order",
+  (req, res, next) => {
+    // const url = req.protocol + "://" + req.get("host");
+    // console.log(url);
+    console.log("req body",req.body)
+    const post = new Order({
+    
+      userid:req.body.userid,
+      prodname:req.body.prodname,
+      Quantity:req.body.Quantity,
+      address:req.body.address,
+      prodid:req.body.prodid,
+      image:req.body.image,
+      contactNumber:req.body.contactNumber,
+
+
+    });
+    post.save().then(createdPost => {
+      console.log("createdPost",createdPost);
+      res.status(201).json({
+        message: "Order added successfully!",
+        post: {
+          ...createdPost,
+          id: createdPost._id
+        }
+      });
+    });
+  }
+);
+
+
+
+
 router.get("", (req, res, next) => {
    
     const postQuery=Post.find()
     let fetchedPosts;
-    // if(pageSize && currentPage){
-    //     postQuery.skip(pageSize*(currentPage-1)).limit(pageSize)
-    // }
-    // postQuery.then(documents=>{
-    //     fetchedPosts=documents
-    //     return Post.count()
-    // })
     postQuery.then(documents=>
       {
         fetchedPosts = documents
-        console.log(fetchedPosts)
+        console.log("fetchedPosts",fetchedPosts)
         res.status(200).json({data : fetchedPosts})
       })
 
     });
-  //   .then(count => {
-  //   res.status(200).json({
-  //     message: "Posts fetched successfully!",
-  //     posts: fetchedPosts,
-  //     maxPosts:count
-  //   });
-  // });
-    
 
+
+    
+router.get("/order", (req, res, next) => {
+   
+  const postQuery=Order.find()
+  let fetchedPosts;
+  postQuery.then(documents=>
+    {
+      fetchedPosts = documents
+      console.log("fetchedPosts",fetchedPosts)
+      res.status(200).json({data : fetchedPosts})
+    })
+
+  });
+    
   router.get("/:id", (req, res, next) => {
 
+    console.log("id updated")
     Post.findById({ _id: req.params.id }).then(post => {
       if (post) {
         res.status(200).json(post);
@@ -95,8 +133,11 @@ router.get("", (req, res, next) => {
       }
     });
   });
+
+  
   router.delete("/:id", (req, res, next) => {
-    Post.deleteOne({ _id: req.params.id }).then(() => {
+    console.log(req.params.id)
+    Order.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "deleted!" });
     });
   });

@@ -123,6 +123,11 @@ input[type="file"]{
   visibility: hidden;
 }
 
+.edit-prod
+{
+  margin-top: 65px;
+}
+
 .image-preview{
   height: 5rem;
   margin:1rem 0;
@@ -131,3 +136,7 @@ input[type="file"]{
   height: 100%;
 }
 
+.edit-prod
+{
+  margin-top: 74px;
+}

@@ -6,6 +6,7 @@ import { Subscription, from } from 'rxjs';
 import   products  from 'src/assets/data.json';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dataservice } from 'src/app/data-service';
+import { PostsService } from 'src/app/posts/posts.service';
 
 
 @Component({
@@ -16,89 +17,66 @@ import { Dataservice } from 'src/app/data-service';
 export class DataDetailComponent implements OnInit, OnDestroy {
   products: any = [];
   @Output() closedetail = new EventEmitter();
+
+ 
+
   constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,
     private dataservice: Dataservice,
+    private postservice: PostsService,
     private modalService: NgbModal,
     private formbuilder: FormBuilder,
     
-    ) {
-       this.products = products;
-     }
-
-
-    
-
-  postForm:FormGroup
-  
-
-
-
-  id: number;
+    ) { }
+  orderForm:FormGroup
+  d: number;
   type:string;
  
   value = false;
   time: string;
-  data: {id:number,type:string,name:string,image: string,price: string,estimatedprice: string,description: string,clothtype:string,color:string};
-  private subscription: Subscription;
+  quantity = [1,2,3,4,5,6]
+  data:any
+    private subscription: Subscription;
 
   @ViewChild('content') Elementref;
 
-  @Input() detail;
-  
-  topofmenarea = 0;
-  topofwomenarea = 0;
-  topofkidarea = 0;
-  ngOnInit(): void {      
+  detailcont: any
+  ngOnInit(): void {     
 
-    this.postForm=this.formbuilder.group({
-      'name': new FormControl("",[Validators.required]),
-      'number': new FormControl("",[Validators.required]),
-      'password': new FormControl("",[Validators.required]),
-      'repassword': new FormControl("",[Validators.required]),
-      'email': new FormControl("",[Validators.required])
+   
+    this.dataservice.getdatadetail().subscribe((value)=>
+    {
+      this.data = value
+      this.modalService.open(this.Elementref,{ size: 'xl',centered: true });
+      console.log("subscriber",this.data)
+
+      // this.orderForm=this.formbuilder.group({
+      //   'userid': new FormControl("huysdghsfbjh213",[Validators.required]),
+      //   // this.detail.name
+      //   'prodname': new FormControl(this.data?.name,[Validators.required]),
+      //   'Quantity': new FormControl("",[Validators.required]),
+      //   'address': new FormControl("",[Validators.required]),
+      //   'prodid': new FormControl(this.data?._id,[Validators.required]),
+      //   'image': new FormControl(this.data?.image,[Validators.required]),
+      //   'contactNumber': new FormControl("",[Validators.required]),
+  
+      // })
+
+ this.orderForm=this.formbuilder.group({
+        'userid': new FormControl("huysdghsfbjh213",[Validators.required]),
+        // this.detail.name
+        'prodname': new FormControl(this.data?.name,[Validators.required]),
+        'Quantity': new FormControl("",[Validators.required]),
+        'address': new FormControl("",[Validators.required]),
+        'prodid': new FormControl(this.data?._id,[Validators.required]),
+        'image': new FormControl(this.data?.image,[Validators.required]),
+        'contactNumber': new FormControl("",[Validators.required]),
+  
+      })
+     
     })
     
-
-    this.dataservice.heightofdiv.subscribe(
-      ( size: { menarea: number; womenarea: number;kidarea: number }) =>
-      {
-       
-        this.topofkidarea = size.kidarea;
-        this.topofmenarea = size.menarea;
-        this.topofwomenarea = size.womenarea;
-       
-      }
-    )
-
-   window.scrollTo(0,0);
-
-        
-          this.id = this.detail.number.valueOf();
-          console.log(typeof this.id);
-          this.type =this.detail.name.toString();
-          console.log(typeof this.type);
-          this.value = true;
-          
-          if(this.type === "women")
-          this.data = this.products.dataobj.womens[this.id];
-          if(this.type === "men")
-          this.data = this.products.dataobj.mens[this.id];
-          if(this.type === "kids")
-          this.data = this.products?.dataobj?.kids[this.id];
-        
+   
     
-  
-      this.subscription = this.dataservice.detailenable.subscribe(
-        (value: boolean) =>
-        {
-         
-          if(value)
-          this.value = true;
-          else
-          this.value = false;
-        }
-      )
-
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
 
 var x = setInterval(function() {
@@ -122,8 +100,8 @@ var now = new Date().getTime();
   }
 
   ngAfterViewInit(): void {
-    // this.modalService.open(this.Elementref);
-    this.modalService.open(this.Elementref,{ size: 'xl',centered: true });
+  
+    // this.modalService.open(this.Elementref,{ size: 'xl',centered: true });
    
   }
   overallcontent = true;
@@ -133,8 +111,7 @@ var now = new Date().getTime();
   order()
   {
     this.enableform = !this.enableform
-    // this.orderbtn = !this.orderbtn;
-    // this.overallcontent = !this.orderbtn
+  
     
   }
 
@@ -146,9 +123,32 @@ var now = new Date().getTime();
   
   }
 
+  onSaveOrder()
+  {
+    console.log("orderForm----",this.orderForm.value)
+
+    this.postservice.addOrder(this.orderForm.value).subscribe((result)=>{
+      if(result){
+        this.router.navigate(["/"])
+      }
+    })
+
+
+    this.detailclose()
+  }
+
+  orderQuantity(value)
+  {
+    console.log(">>>>> - ",this.data?.id)
+    this.orderForm.controls.prodname.patchValue(this.data?.name);
+    this.orderForm.controls.prodid.patchValue("kfdmgdk4353434");
+    this.orderForm.controls.image.patchValue(this.data?.image);
+    this.orderForm.controls.Quantity.patchValue(value);
+  }
+
   ngOnDestroy()
   {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
   
 

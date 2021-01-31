@@ -7,11 +7,11 @@ const postRoutes=require("./routes/posts")
 const app = express();
 moongose
   .connect(
-    "mongodb+srv://Ranjith:UnWaW6zlxYK3ZXxS@cluster0.iwthv.mongodb.net/node-angular?retryWrites=true&w=majority"
+    "mongodb+srv://user12:usertan@nodeapp.bsti1.mongodb.net/NSR-prj?retryWrites=true&w=majority"
  
   )
   .then(() => {
-    console.log("connected to database!");
+    console.log("connected to database! NSR");
   })
   .catch((error) => {
     console.log("connection failed!",error);

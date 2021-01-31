@@ -27,7 +27,7 @@ export class EditProductComponent implements OnInit {
 
   enteredtitle=''
   enteredcontent=''
-  mode='create'
+  createmode= true
   isLoading=false
   postId
   imagePreview:string
@@ -45,28 +45,24 @@ export class EditProductComponent implements OnInit {
       )  { }
   ngOnInit(): void {
 
-    //  this.httpClient.get("assets/data.json").subscribe(data =>{
-    //   this.products = data;
-    // })
-
-    this.products = this.dataservice.getProducts()
-
-     this.route.params.subscribe((params: Params)=>
+   
+    this.dataservice.geteditdata().subscribe((value)=>
     {
-     this.id = +params['id'];
-     this.type = params['type']
-     console.log(this.id,this.type,this.products)
-     
-
-      if(this.type === "women")
-      this.data = this.products.dataobj.womens[this.id];
-      if(this.type === "men")
-      this.data = this.products.dataobj.mens[this.id];
-      if(this.type === "kids")
-      this.data = this.products?.dataobj?.kids[this.id];
-      console.log(this.data)
-
+      this.data = value
+      console.log("subscribed",this.data)
     })
+
+
+    //  this.route.params.subscribe((params: Params)=>
+    // {
+    //  this.id = params['id'];
+    //  this.type = params['type']
+    //  this.createmode = false
+    //  this.postId = params['id'];
+    //  console.log("----AAAA---",this.id,this.type,this.products)
+    //  this.data = this.dataservice.getProduct(this.id)
+     
+    // })
 
       this.postForm = this.formBuilder.group({
       // id: ["", Validators.required],
@@ -81,9 +77,9 @@ export class EditProductComponent implements OnInit {
       color: ["", Validators.required],
       clothtype: ["", Validators.required],
     });
-    console.log("patch val",this.data)
+    // console.log("patch val",this.data)
       this.imagePreview= this.data?.image
-    this.postForm.patchValue(this.data)
+     this.postForm.patchValue(this.data)
 
 
 
@@ -112,22 +108,32 @@ export class EditProductComponent implements OnInit {
 
 
   onSavePost(){
-    console.log(this.postForm.value,"onsave")
+    
+
+    if(this.createmode){
       this.postservice.addPost(this.postForm.value).subscribe((result)=>{
-       
         if(result){
           this.router.navigate(["/"])
         }
       })
 
-      // this.postservice.updatePost(this.postId,this.postForm.value).subscribe((result)=>{
-      //   if(result){
-      //     this.router.navigate(["/"])
-        
-      // })
-      this.postForm.reset();
     }
-   
+    else{
+      this.postservice.updatePost(this.postId,this.postForm.value).subscribe((result)=>{
+        if(result){
+          this.router.navigate(["/"])
+        }
+      })
+
+    }
+    this.postForm.reset();
+
+
+    }
+  
+
+
+
     onImagePicked(event:Event){
      const file=(event.target as HTMLInputElement).files[0];
      this.postForm.patchValue({image:file});

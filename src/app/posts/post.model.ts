@@ -1,5 +1,5 @@
 export interface Post{
-    // id:Number;
+    id:string;
     type:string;
     name:string;
     image:string;
@@ -11,3 +11,4 @@ export interface Post{
     extrainfo:string;
     color:string;
 }
+

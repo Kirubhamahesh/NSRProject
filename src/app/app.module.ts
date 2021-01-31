@@ -19,6 +19,11 @@ import { RegisterUserComponent } from './frontendComponenets/register-user/regis
 import { FilterComponent } from './frontendComponenets/filter/filter.component';
 import { MainComponent } from './frontendComponenets/main/main.component';
 import { AdminHomepageComponent } from './backendComponents/admin-homepage/admin-homepage.component';
+import { MyordersComponent } from './frontendComponenets/myorders/myorders.component';
+import { PostsService } from './posts/posts.service';
+import { FooterComponent } from './frontendComponenets/footer/footer.component';
+import { ProductDetailComponent } from './frontendComponenets/product-detail/product-detail.component';
+import { AdminheaderComponent } from './backendComponents/adminheader/adminheader.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,10 @@ import { AdminHomepageComponent } from './backendComponents/admin-homepage/admin
     EditProductComponent,
     EditProductComponent,
     AdminHomepageComponent,
+    MyordersComponent,
+    FooterComponent,
+    ProductDetailComponent,
+    AdminheaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,7 @@ import { AdminHomepageComponent } from './backendComponents/admin-homepage/admin
     
   ],
   exports: [AppRoutingModule],
-  providers: [Dataservice],
+  providers: [Dataservice,PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

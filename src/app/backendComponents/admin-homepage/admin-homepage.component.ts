@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Dataservice } from 'src/app/data-service';
+import { PostsService } from 'src/app/posts/posts.service';
 
 
 @Component({
@@ -9,7 +11,8 @@ import { Dataservice } from 'src/app/data-service';
   styleUrls: ['./admin-homepage.component.css']
 })
 export class AdminHomepageComponent implements OnInit {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,private dataservice: Dataservice) { }
+  constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
+
   list=[
    
   "Mens",
@@ -34,11 +37,13 @@ export class AdminHomepageComponent implements OnInit {
   }
   onNavClick(value){
 
-    // this.router.navigate(['gotoproduct'])
-  console.log("onnav",value)
-
-  this.dataservice.setheaderactive(value)
+    this.dataservice.setsideheaderStyle(value)
   
+  }
+
+  navigateToOrderOrAddItem(value)
+  {
+    this.router.navigate([value]);
   }
 
   

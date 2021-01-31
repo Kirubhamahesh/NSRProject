@@ -19,63 +19,67 @@ export class DataListComponent implements OnInit
   private headsubscription: Subscription;
 
   currentActive = 'Home';
-  x:number;
+ 
   constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
 
-  currreq = 'women'
+  currreq = 'womens'
   requiredProducts: any = [];
 
-  // updateRequiredProductsByHeader()
-  // {
-   
-  
+  mensarray = []
+  womensarray = []
+  kidsarray = []
 
-  // }
   ngOnInit(){
-
-
   
-    
-   this.headsubscription = this.dataservice.getheaderStyle().subscribe((value)=>
+      this.postservice.getPosts().subscribe((value)=>
     {
-      console.log("subscribed in list")
-      this.currreq = value;
+      this.products = value.data
+       console.log("getpost in data lis",this.products)
 
-      if(this.currreq == 'men')
-      this.requiredProducts = this.products.dataobj.mens;
-      else if(this.currreq == 'women')
-      this.requiredProducts = this.products.dataobj.womens;
-      else if(this.currreq == 'kid')
-      this.requiredProducts = this.products.dataobj.kids;
-      console.log("heasubded",this.requiredProducts)
-      this.dataservice.setrequiredProducts(this.requiredProducts)
+
+      for(let i=0;i<this.products.length;i++)
+        {
+          if(this.products[i].type == 'men')
+          this.mensarray.push(this.products[i])
+          else if(this.products[i].type == 'women')
+          this.womensarray.push(this.products[i])
+          else if(this.products[i].type == 'kids')
+          this.kidsarray.push(this.products[i])
+        }
+      this.headsubscription = this.dataservice.getheaderStyle().subscribe((curvalue)=>
+        {
+          console.log("subscribed in data list",curvalue)
+          this.currreq = curvalue;
+    
+          if(this.currreq == 'men')
+          this.requiredProducts = this.mensarray
+          else if(this.currreq == 'womens')
+          this.requiredProducts = this.womensarray
+          else if(this.currreq == 'kid')
+          this.requiredProducts = this.kidsarray
+          console.log("requiredProducts",this.requiredProducts)
+          this.dataservice.setrequiredProducts(this.requiredProducts)
+        })
     })
- 
 
     this.currentActive = 'NSR';
-    this.subscription = this.httpClient.get("assets/data.json").subscribe(data =>{
-    this.products = data;
-    
-    this.requiredProducts = this.products.dataobj.womens;
-    this.dataservice.setrequiredProducts(this.requiredProducts)
-   
-  })
-
-
+ 
       this.dataservice.FilteredDatas.subscribe(value=>
         {
+          this.requiredProducts = []
           this.requiredProducts = value;
         })
 
         this.dataservice.getclearFilter().subscribe((value)=>
         {
           console.log("clear filter subscribed",this.currreq)
+          console.log(this.womensarray)
           if(this.currreq == 'men')
-          this.requiredProducts = this.products.dataobj.mens;
-          else if(this.currreq == 'women')
-          this.requiredProducts = this.products.dataobj.womens;
+          this.requiredProducts = this.mensarray
+          else if(this.currreq == 'womens')
+          this.requiredProducts = this.womensarray
           else if(this.currreq == 'kid')
-          this.requiredProducts = this.products.dataobj.kids;
+          this.requiredProducts = this.kidsarray
           console.log(this.requiredProducts)
           this.dataservice.setrequiredProducts(this.requiredProducts)
         })
@@ -87,20 +91,17 @@ export class DataListComponent implements OnInit
   }
   
   value: { number: number; name: string; }
-  onbuymethod(number: number,name: string)
+  onbuymethod(item)
   {
-   this.value = {number,name};
-    console.log("navigate methd")
-    // this.detail = false;
     this.dataservice.subjectmethod(false);
     this.dataservice.detailenablemethod(true);
     this.dataservice.listenablemethod(false);
-    this.dataservice.datadetailmethod(this.value);
+    this.dataservice.datadetailmethod(item);
     window.scrollTo(0,0);
     
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    this.headsubscription.unsubscribe();
+    // this.subscription.unsubscribe();
+    // this.headsubscription.unsubscribe();
    }
 }

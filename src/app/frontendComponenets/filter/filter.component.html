@@ -1,4 +1,4 @@
-
+ 
 <div class="filter-block">
   <button (click)="openFilter()" *ngIf="!clearbtn" class="filter-btn">  
     <img src="./assets/images/icon.png"  class="filter-image"> Filter</button>
@@ -6,6 +6,10 @@
       <img src="./assets/images/icon.png"  class="filter-image"> clear Filter</button>
   </div>
    
+
+  
+  <!-- <div class="sticky">I will stick to the screen when you reach my scroll position</div>
+   -->
   
 <ng-template #content let-modal >
     <div class="modal-header">
@@ -24,7 +28,7 @@
         <div class="col-md-6">
           <div class="item-block"  *ngFor="let item of FilterTypeProd let i = index">
             <input type="checkbox" id='content-{{i}}' [(ngModel)]=item.status (click)="selectedProdByType(item)">
-            <label for='content-{{i}}' > {{ item.content }}</label>
+            <label for='content-{{i}}' style="margin-left:15px"> {{ item.content }}</label>
           </div> 
         </div>
 
@@ -34,8 +38,8 @@
 
             <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
             
-              <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ dropdatamin }}</button>
+              <div ngbDropdown class="d-inline-block ">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>min - {{ dropdatamin }}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <div  *ngFor="let item of dropdownone" (click)="selectedprice(item)">
                     <button ngbDropdownItem
@@ -46,8 +50,8 @@
                 </div>
                 </div>
                 
-              <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ dropdatamax }}</button>
+              <div ngbDropdown class="d-inline-block right-dropdown">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>max - {{ dropdatamax }}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <div  *ngFor="let item of dropdowntwo" (click)="selectedprice(item)">
                     <button ngbDropdownItem

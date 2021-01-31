@@ -1,3 +1,12 @@
+/* 
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: yellow;
+  padding: 50px;
+  font-size: 20px;
+} */
 
 
 .filter-image {
@@ -11,15 +20,24 @@
     background-color: #FFFFFF;
     border:none;
     outline: none;
-    padding: 8px 16px;
+   
+    padding: 8px 16px!important;
 }
 
-.filter-block {
-    display: flex;
+  .filter-block {
+    /* position: -webkit-sticky; */
+    position: sticky;
+    top:0;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
-    background-color: lightgray;
+    align-items: center; */
+     background-color: lightgray; 
   
+}
+
+.right-dropdown
+{
+  margin-left: 20px;
 }
 
 .item-block

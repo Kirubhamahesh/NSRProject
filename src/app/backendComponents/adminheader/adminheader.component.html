@@ -1,0 +1,25 @@
+
+ <header class="page-header" [ngClass]="{'animation fadeInDown':animation}">
+    <nav class="nav-group nav-group-res">
+      <a class="nav-items "[ngClass]="{'nav-items-res':toggle}" (click)="gotohome()">
+         <div class="nav-logo d-block d-md-none">
+          <img src="./assets/images/logoc.jpeg" style="width: 100%; margin-right: 20px;" (click)=" gotohome()">
+        
+        </div>
+        <div class="nav-logo d-none d-md-block">
+          <img src="./assets/images/logoc.jpeg" style="width: 100%; margin-right: 20px;" (click)=" gotohome()">
+        </div>
+        </a>
+     
+      <div class="nav-right-group nav-right-res">
+        <a class="nav-items" [ngClass]="{'nav-items-res':toggle}" > Logout </a>
+       
+      </div>
+    </nav>
+    <div class="menu">
+        <i class="material-icons menu-icon nav-items"  *ngIf="!toggle"(click)="showMenu()" tabindex="0">menu</i>
+        <i class="material-icons close-icon nav-items" *ngIf="toggle"(click)="showMenu()"tabindex="0">close</i> 
+    </div>
+  
+  </header>
+  

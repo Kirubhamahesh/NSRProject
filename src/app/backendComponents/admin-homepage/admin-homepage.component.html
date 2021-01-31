@@ -1,22 +1,36 @@
 
-    <div class="container-fluid">
+<app-adminheader></app-adminheader>
+
+   <div class="container-fluid adminpage">
         <div class="row">
             <div class="col-md-3">
                 <div class="side-nav d-none d-md-block" (scroll)="onScroll($event)">
                     <ul class="side-nav__menu">
                         <li class="side-nav__head"><a class="" >Products</a></li>
+
                     <li class="side-nav__menu-items" [routerLinkActive]="['active']"
-                    *ngFor="let member of members"
-                    ><a class="side-nav__menu-content" 
-                    (click)="onNavClick(member)">{{member}}</a>
+                    (click)="onNavClick('men')">
+                    <a class="side-nav__menu-content" >Men</a>
                     </li>
-                    <li class="side-nav__head"><a class="" >Add item</a></li>
-                    <li class="side-nav__head"><a class="" >orders</a></li>
+                    <li class="side-nav__menu-items" [routerLinkActive]="['active']"
+                    (click)="onNavClick('womens')">
+                    <a class="side-nav__menu-content" >Women</a>
+                    </li>
+                    <li class="side-nav__menu-items" [routerLinkActive]="['active']"
+                    (click)="onNavClick('kid')">
+                    <a class="side-nav__menu-content" >Kids</a>
+                    </li>
+
+
+                    <li class="side-nav__head"><a style="cursor: pointer;"  (click)="navigateToOrderOrAddItem('additem')">Add item</a></li>
+                    <li class="side-nav__head"><a style="cursor: pointer;"  (click)="navigateToOrderOrAddItem('viewAllOrders')">orders</a></li>
                 </ul>
                     </div>
             </div>
             <div class="col-md-9">
-               <app-display-list></app-display-list>
+                <app-display-list></app-display-list>
             </div>
         </div>
     </div>
+
+  

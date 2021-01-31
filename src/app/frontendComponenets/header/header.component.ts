@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Dataservice } from 'src/app/data-service';
 
@@ -10,7 +11,7 @@ import { Dataservice } from 'src/app/data-service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dataservice: Dataservice) { }
+  constructor(private route: ActivatedRoute,private dataservice: Dataservice,private router: Router) { }
   animation = false;
   activelink:string;
   topofmenarea = 0;
@@ -35,11 +36,10 @@ if(document.documentElement.scrollTop >=75 && document.documentElement.scrollTop
   {
     this.dataservice.setheaderStyle('womens');
     window.scrollTo(0,0);
+    this.router.navigate(['gotoproduct'])
   }
 
 
-
-  size: { menarea: number; womenarea: number;kidarea: number }
 
   ngOnInit(): void {
   }
@@ -56,25 +56,27 @@ if(document.documentElement.scrollTop >=75 && document.documentElement.scrollTop
   document.getElementById("scrollBar").style.width = scrolled + "%";
   }
 
-
-
-
   aboutusscroll()
   {
     this.showMenu();
-    
+  }
+
+  displayordercomp()
+  {
+    this.router.navigate(['order'],{ relativeTo : this.route})
   }
 
 showMenu(){
-    this.toggle=false
+    this.toggle=!this.toggle
 }
   
   setStyle(value)
+
   { console.log("next",value)
     this.dataservice.setheaderStyle(value);
    
     this.activelink = value;
-    window.scrollTo(0,580);
+     window.scrollTo(0,580);
   }
 }
 

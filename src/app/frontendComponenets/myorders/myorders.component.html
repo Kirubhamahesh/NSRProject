@@ -1,0 +1,61 @@
+<div class="myorder-body">
+    <div class="outer-layout">
+
+       <div class="order-text">  <h2>My Orders</h2> </div>
+
+       <div class="card-layout"> 
+          
+        
+
+  <div class="container-fluid">
+    
+    <div class="row cards"  id="demo2"  *ngFor="let item of productOrders">
+
+      <div class="col-sm-4 col-md-4 col-lg-4 ">
+     
+          <div class="imagediv"> <img [src]="item.image"  class="image" alt="{{ item.name}}">
+           
+          </div>
+          
+      
+      </div>
+
+      <div class="col-sm-4 col-md-4 col-lg-4" >
+   
+            <div> 
+              <span class="head-text"> Product name</span>
+              <h5> {{ item.prodname}} </h5>
+
+              <h6> <span>Qty </span>  {{ item.Quantity}}</h6>
+              
+              <span class="head-text"> Status</span>
+              <h4 style="color:darkorange;">  In - Transit</h4>
+             </div>
+       
+        </div>
+
+
+        <div class="col-sm-4 col-md-4 col-lg-4" >
+   
+          <div> 
+            <span class="head-text"> Delivery address</span>
+            <h6>  {{ item.address}}</h6>
+
+            <span class="head-text"> Delivery expected by</span>
+            <h4>21 March 2021</h4>
+           </div>
+
+           <button class="btn btn-danger" style="margin-top: 30px;" (click)="deleteItem(item._id)" >cancel order</button>
+     
+      </div>
+
+
+
+
+      <div class="no-filter" *ngIf="productOrders.length == 0">  <h1>No orders</h1> </div>
+    </div>
+  </div>
+
+       </div>
+    </div>
+</div>

@@ -1,3 +1,6 @@
+<app-carousel></app-carousel>
+
+
 <div class="bodystyle" >
 
   <div class="icon-bar">
@@ -27,11 +30,20 @@
               <span style="background-color: #32cd32; border-radius: 10px 10px 10px 10px; padding: 3px; color: white;">special price</span> <br>
               <div > <span>{{ item.estimatedprice }}</span> <span  style="margin-left: 10px; color: blue; font-size: small;"><s>{{ item.price }}</s></span></div>
               <span style="color:#32cd32; font-size: 14px;">Buy combo, save extra 20%</span>
-              <button class="btn btn-primary placeorderbtn" (click)="onbuymethod(item.id,item.type)"  style="border-color: none!important;">View product</button>
+              <button class="btn btn-primary placeorderbtn" (click)="onbuymethod(item)"  style="border-color: none!important;">View product</button>
              </div>
            </div>
         </div>
+
+        <!-- <div class="no-filter" *ngIf="requiredProducts.length == 0">  <h1>No filter found</h1> </div> -->
       </div>
     </div></div>
+
+    <!-- <div *ngIf="datadetail">
+      <app-data-detail></app-data-detail>
+    </div> -->
+
+
+
 
   

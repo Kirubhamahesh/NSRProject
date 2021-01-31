@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import {map} from 'rxjs/Operators'
+import { Order } from './order.model';
 
 @Injectable({
   providedIn: "root"
@@ -18,29 +19,20 @@ export class PostsService {
       .get<any>(
         "http://localhost:3000/api/posts"
       )
-      // .pipe(map(postData=>{
-      //     return {data:postData.posts.map(post=>{
-      //         return {
-      //             id:post._id,
-      //             type:post.type,
-      //             name:post.name,
-      //             image:post.image,
-      //             estimatedprice:post.estimatedprice,
-      //             price:post.price,
-      //             fabric:post.fabric,
-      //             clothtype:post.clothtype,
-      //             description:post.description,
-      //             extrainfo:post.extrainfo,
-      //             color:post.color,
-        
-      //         }
-      //     }),maxposts:postData.maxPosts
-      // }}))
-    //   .subscribe(transformData => {
-    //     this.posts = transformData;
-    //     this.postUpdated.next([...this.posts]);
-    //   });
+   
   }
+
+
+  getOrderdatas() {
+      
+    return this.http
+       .get<any>(
+         "http://localhost:3000/api/posts/order"
+       )
+    
+   }
+
+
   getPostUpdatedListner() {
     console.log("listener")
     return this.postUpdated.asObservable();
@@ -66,7 +58,7 @@ export class PostsService {
   }
 
   addPost(post) {
-      console.log(post)
+      console.log("post",post)
       const postData=new FormData()
 
       postData.append('type',post.type)
@@ -79,52 +71,61 @@ export class PostsService {
       postData.append('fabric',post.fabric)
       postData.append('description',post.description)
       postData.append('extrainfo',post.extrainfo)
-     
-     
 
-
-      console.log("value here",postData);
+      console.log("postData----",postData)
   return  this.http
       .post<{ message: string,post:Post }>("http://localhost:3000/api/posts", postData)
-    //   .subscribe(() => {
-    //     console.log("successfull");
-    //     // this.posts.push(post);
-    //     // this.postUpdated.next(this.posts);
-    //     // this.getPosts()
-    //   });
+
   }
 
-  deletePost(postId:string){
-       return this.http.delete("http://localhost:3000/api/posts/"+postId)
-    //   .subscribe(()=>{
-    //     console.log("hiii")
+  addOrder(orderob) {
+    console.log("orderob------->>",orderob.address,orderob.userid,orderob.prodname,orderob.contactNumber,orderob.Quantity,orderob.prodid,orderob.image)
 
-    //       console.log("deleted")
-    //     //   const updatedPost=this.posts.filter(post => post.id !==postId)
-    //     //   this.posts=updatedPost
-    //     //   this.postUpdated.next([...this.posts])
-    //     //   this.getPosts()
-    //   })
+    // const orderData=new FormData()
+
+    // orderData.append('userid',orderob.userid)
+    // orderData.append('prodname',orderob.prodname)
+    // orderData.append('Quantity',orderob.Quantity)
+    // orderData.append('prodid',orderob.prodid)
+    // orderData.append('image',orderob.image)
+    // orderData.append('contactNumber',orderob.contactNumber)
+
+    let orderData = { 'userid':orderob.userid,'prodname':orderob.prodname,'address':orderob.address,'Quantity':orderob.Quantity,'prodid':orderob.prodid,
+    'image':orderob.image,'contactNumber':orderob.contactNumber
+  }
+
+
+    console.log("orderData -- ",orderData)
+  
+
+return  this.http
+    .post<{ message: string,orderob:Order }>("http://localhost:3000/api/posts/order", orderData)
+ 
+}
+
+
+  deletePost(postId:string){
+    console.log("inpost")
+       return this.http.delete("http://localhost:3000/api/posts/"+postId)
+    
   }
 
   updatePost(postId:String,post){
-  //     let postData
-  //     if(typeof post.image ==='object'){
-  //        postData=new FormData()
-  //        postData.append('id',post.id)
-  //       postData.append('title',post.title)
-  //       postData.append('content',post.content)
-  //       postData.append('image',post.image, post.title)
-  //     }
-  //     else{
-  //          postData={
-  //           id:post.id,
-  //           title:post.title,
-  //           content:post.content,
-  //           imagePath:post.image
-        
-  //          }
-  //     }
-  //     return this.http.put("http://localhost:3000/api/posts/"+postId,postData)
+
+  const postData=new FormData()
+
+  postData.append('type',post.type)
+  postData.append('image',post.image)
+  postData.append('name',post.name)
+  postData.append('price',post.price)
+  postData.append('estimatedprice',post.estimatedprice)
+  postData.append('clothtype',post.clothtype)
+  postData.append('color',post.color)
+  postData.append('fabric',post.fabric)
+  postData.append('description',post.description)
+  postData.append('extrainfo',post.extrainfo)
+
+  return this.http.put("http://localhost:3000/api/posts/"+postId,postData)
+
   }
 }

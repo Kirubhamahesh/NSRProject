@@ -13,10 +13,11 @@
     <!-- <a class="nav-items nav-items-res" (click)="gotohome()"> <h5 style="color: white; margin:0">NSR</h5> </a> -->
     <a class="nav-items" [ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'womens'}"    (click)="setStyle('women')" > Womens</a>
     <a class="nav-items" [ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'mens'}"  (click)="setStyle('men')"> Mens</a>
-    <a class="nav-items "[ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'kids'}"  (click)="setStyle('kid')"> Kids </a>
-    <!-- <div class="nav-right-group">
+    <a class="nav-items" [ngClass]="{'nav-items-res':toggle,'colorchange': activelink == 'kids'}"  (click)="setStyle('kid')"> Kids </a>
+    <div class="nav-right-group nav-right-res">
+      <a class="nav-items" [ngClass]="{'nav-items-res':toggle}" (click)="displayordercomp()"> My orders</a>
         <a class="nav-items" [ngClass]="{'nav-items-res':toggle}" (click)="aboutusscroll()"> About Us</a>
-    </div> -->
+    </div>
   </nav>
   <div class="menu">
       <i class="material-icons menu-icon nav-items"  *ngIf="!toggle"(click)="showMenu()" tabindex="0">menu</i>
