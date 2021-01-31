@@ -78,8 +78,30 @@ export class PostsService {
 
   }
 
+
+  
+  addUser(post) {
+    console.log("post",post)
+  
+   
+    let userData = { 'username':post.username,'email':post.email,'password':post.password,'contactnumber':post.contactnumber
+  }
+
+    console.log("postData----",userData)
+return  this.http
+    .post<{ message: string,post:Post }>("http://localhost:3000/api/posts/user", userData)
+
+}
+
+
   addOrder(orderob) {
-    console.log("orderob------->>",orderob.address,orderob.userid,orderob.prodname,orderob.contactNumber,orderob.Quantity,orderob.prodid,orderob.image)
+    console.log("orderob------->>",orderob.address,
+    orderob.userid,
+    orderob.prodname,
+    orderob.contactNumber,
+    orderob.Quantity,
+    orderob.prodid,
+    orderob.image)
 
     // const orderData=new FormData()
 

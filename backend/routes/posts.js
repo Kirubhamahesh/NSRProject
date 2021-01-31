@@ -93,6 +93,35 @@ router.post(
 
 
 
+router.post(
+  "/user",
+  (req, res, next) => {
+   
+    console.log("req body",req.body)
+    const post = new User({
+    
+      username:req.body.username,
+      email:req.body.email,
+      password:req.body.password,
+      contactnumber:req.body.contactnumber,
+     
+    });
+    post.save().then(createdPost => {
+      console.log("createdPost",createdPost);
+      res.status(201).json({
+        message: "user added successfully!",
+        post: {
+          ...createdPost,
+          id: createdPost._id
+        }
+      });
+    });
+  }
+);
+
+
+
+
 
 router.get("", (req, res, next) => {
    

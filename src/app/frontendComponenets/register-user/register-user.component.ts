@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { Dataservice } from 'src/app/data-service';
+import { PostsService } from 'src/app/posts/posts.service';
 
 @Component({
   selector: 'app-register-user',
@@ -9,16 +13,20 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegisterUserComponent implements OnInit {
 
-  constructor(private formbuilder: FormBuilder)  { }
+  constructor(private formbuilder: FormBuilder,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
+
 
   postForm:FormGroup
+  
+  gender = ['Male','Female','Other']
   
   ngOnInit(): void {
 
     
   this.postForm=this.formbuilder.group({
-    'name': new FormControl("",[Validators.required]),
-    'number': new FormControl("",[Validators.required]),
+    'username': new FormControl("",[Validators.required]),
+    'contactnumber': new FormControl("",[Validators.required]),
+    'gender': new FormControl("Male",[Validators.required]),
     'password': new FormControl("",[Validators.required]),
     'repassword': new FormControl("",[Validators.required]),
     'email': new FormControl("",[Validators.required])
@@ -31,7 +39,15 @@ export class RegisterUserComponent implements OnInit {
    console.log( this.postForm.value);
   }
 
+  selectedgender(value)
+  {
+    this.postForm.controls.gender.patchValue(value);
+  }
 
+  onSubmit()
+  {
+    this.postservice.addUser(this.postForm.value)
+  }
 
   
 

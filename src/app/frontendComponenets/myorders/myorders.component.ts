@@ -27,7 +27,7 @@ export class MyordersComponent implements OnInit {
        console.log("getorder in  lis",this.productOrders)
     })
 
-
+    window.scrollTo(0,0)
 
   }
 

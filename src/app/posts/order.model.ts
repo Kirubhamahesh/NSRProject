@@ -1,5 +1,5 @@
 export interface Order{
-    
+    id:string
     contactNumber:Number;
     userid:string;
     prodid:string;
