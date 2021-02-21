@@ -4,6 +4,9 @@ import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import {map} from 'rxjs/Operators'
 import { Order } from './order.model';
+import { User } from '../frontendComponenets/models/User';
+
+ 
 
 @Injectable({
   providedIn: "root"
@@ -21,6 +24,15 @@ export class PostsService {
       )
    
   }
+
+  getUsers() {
+      
+    return this.http
+       .get<any>(
+         "http://localhost:3000/api/posts/users"
+       )
+    
+   }
 
 
   getOrderdatas() {
@@ -58,7 +70,7 @@ export class PostsService {
   }
 
   addPost(post) {
-      console.log("post",post)
+      console.log("post image",post.image)
       const postData=new FormData()
 
       postData.append('type',post.type)
@@ -72,7 +84,12 @@ export class PostsService {
       postData.append('description',post.description)
       postData.append('extrainfo',post.extrainfo)
 
-      console.log("postData----",postData)
+      let prodData = { 'type':post.type,'image':post.image,'name':post.name,'price':post.price,
+      'estimatedprice':post.estimatedprice,'clothtype':post.clothtype,'color':post.color,'fabric':post.fabric,
+      'description':post.description,'extrainfo':post.extrainfo}
+
+
+      console.log("postData----",prodData)
   return  this.http
       .post<{ message: string,post:Post }>("http://localhost:3000/api/posts", postData)
 
@@ -84,12 +101,14 @@ export class PostsService {
     console.log("post",post)
   
    
-    let userData = { 'username':post.username,'email':post.email,'password':post.password,'contactnumber':post.contactnumber
-  }
+    let userData = { 'username':post.username,'email':post.email,'password':post.password,'contactnumber':post.contactnumber}
 
     console.log("postData----",userData)
 return  this.http
-    .post<{ message: string,post:Post }>("http://localhost:3000/api/posts/user", userData)
+    .post<{ message: string,post:User }>("http://localhost:3000/api/posts/user", userData).subscribe((resp)=>
+    {
+      console.log(resp)
+    })
 
 }
 
@@ -103,14 +122,6 @@ return  this.http
     orderob.prodid,
     orderob.image)
 
-    // const orderData=new FormData()
-
-    // orderData.append('userid',orderob.userid)
-    // orderData.append('prodname',orderob.prodname)
-    // orderData.append('Quantity',orderob.Quantity)
-    // orderData.append('prodid',orderob.prodid)
-    // orderData.append('image',orderob.image)
-    // orderData.append('contactNumber',orderob.contactNumber)
 
     let orderData = { 'userid':orderob.userid,'prodname':orderob.prodname,'address':orderob.address,'Quantity':orderob.Quantity,'prodid':orderob.prodid,
     'image':orderob.image,'contactNumber':orderob.contactNumber
@@ -127,13 +138,23 @@ return  this.http
 
 
   deletePost(postId:string){
-    console.log("inpost")
+    console.log("inpost",postId)
        return this.http.delete("http://localhost:3000/api/posts/"+postId)
     
   }
 
+  
+  deleteProd(postId:string){
+    console.log("inpost",postId)
+       return this.http.delete("http://localhost:3000/api/posts/prod/"+postId)
+    
+  }
+
+
   updatePost(postId:String,post){
 
+
+    if(typeof post.image ==='object'){
   const postData=new FormData()
 
   postData.append('type',post.type)
@@ -147,7 +168,21 @@ return  this.http
   postData.append('description',post.description)
   postData.append('extrainfo',post.extrainfo)
 
+  console.log("post ser if")
+
   return this.http.put("http://localhost:3000/api/posts/"+postId,postData)
+
+    }
+    else{
+
+  let prodData = { 'type':post.type,'imagePath':post.image,'name':post.name,'price':post.price,
+  'estimatedprice':post.estimatedprice,'clothtype':post.clothtype,'color':post.color,'fabric':post.fabric,
+  'description':post.description,'extrainfo':post.extrainfo}
+
+  console.log("post ser else",prodData)
+  return this.http.put("http://localhost:3000/api/posts/"+postId,prodData)
+
+    }
 
   }
 }

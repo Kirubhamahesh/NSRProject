@@ -15,7 +15,7 @@ export class MyordersComponent implements OnInit {
 
   productOrders: any = [];
   constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
-
+  isloading = true
 
   ngOnInit(): void {
     window.scrollTo(0,0)
@@ -23,6 +23,7 @@ export class MyordersComponent implements OnInit {
     console.log("order comp")
     this.postservice.getOrderdatas().subscribe((value)=>
     {
+      this.isloading = false
       this.productOrders = value.data
        console.log("getorder in  lis",this.productOrders)
     })
@@ -31,10 +32,28 @@ export class MyordersComponent implements OnInit {
 
   }
 
+
+  getPostsData()
+  {
+    this.isloading = true
+    this.postservice.getOrderdatas().subscribe((value)=>
+    {
+      this.isloading = false
+      this.productOrders = value.data
+      window.scrollTo(0,0)
+       console.log("getorder in  lis",this.productOrders)
+    })
+
+  }
+
   deleteItem(id)
   {
-    console.log("de")
-    this.postservice.deletePost(id);
+    this.isloading = true
+    this.postservice.deletePost(id).subscribe((resp)=>
+    { 
+      this.getPostsData();
+    })
+   
   }
 
 }

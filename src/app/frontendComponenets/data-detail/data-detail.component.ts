@@ -15,10 +15,9 @@ import { PostsService } from 'src/app/posts/posts.service';
   styleUrls: ['./data-detail.component.css']
 })
 export class DataDetailComponent implements OnInit, OnDestroy {
+
   products: any = [];
   @Output() closedetail = new EventEmitter();
-
- 
 
   constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,
     private dataservice: Dataservice,
@@ -35,32 +34,20 @@ export class DataDetailComponent implements OnInit, OnDestroy {
   time: string;
   quantity = [1,2,3,4,5,6]
   data:any
-    private subscription: Subscription;
+  private subscription: Subscription;
 
   @ViewChild('content') Elementref;
 
   detailcont: any
   ngOnInit(): void {     
 
-   
     this.dataservice.getdatadetail().subscribe((value)=>
     {
       this.data = value
       this.modalService.open(this.Elementref,{ size: 'xl',centered: true });
       console.log("subscriber",this.data)
 
-      // this.orderForm=this.formbuilder.group({
-      //   'userid': new FormControl("huysdghsfbjh213",[Validators.required]),
-      //   // this.detail.name
-      //   'prodname': new FormControl(this.data?.name,[Validators.required]),
-      //   'Quantity': new FormControl("",[Validators.required]),
-      //   'address': new FormControl("",[Validators.required]),
-      //   'prodid': new FormControl(this.data?._id,[Validators.required]),
-      //   'image': new FormControl(this.data?.image,[Validators.required]),
-      //   'contactNumber': new FormControl("",[Validators.required]),
-  
-      // })
-
+   
  this.orderForm=this.formbuilder.group({
         'userid': new FormControl("huysdghsfbjh213",[Validators.required]),
         // this.detail.name
@@ -77,33 +64,29 @@ export class DataDetailComponent implements OnInit, OnDestroy {
     
    
     
-    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+//     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
 
-var x = setInterval(function() {
-var now = new Date().getTime();
+// var x = setInterval(function() {
+// var now = new Date().getTime();
     
-  var distance = countDownDate - now;
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//   var distance = countDownDate - now;
+//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
   
-  document.getElementById("timer").innerHTML = hours + "h "  + minutes + "m " + seconds + "s ";
-   this.time =  hours + "h "  + minutes + "m " + seconds + "s ";
+//   document.getElementById("timer").innerHTML = hours + "h "  + minutes + "m " + seconds + "s ";
+//    this.time =  hours + "h "  + minutes + "m " + seconds + "s ";
   
-  if (distance < 0) {
-    clearInterval(x);
-    this.time = "EXPIRED";
-  }
-}, 1000);
+//   if (distance < 0) {
+//     clearInterval(x);
+//     this.time = "EXPIRED";
+//   }
+// }, 1000);
 
   }
 
-  ngAfterViewInit(): void {
   
-    // this.modalService.open(this.Elementref,{ size: 'xl',centered: true });
-   
-  }
   overallcontent = true;
   orderbtn = false;
 
@@ -112,7 +95,6 @@ var now = new Date().getTime();
   {
     this.enableform = !this.enableform
   
-    
   }
 
   detailclose()
@@ -125,7 +107,6 @@ var now = new Date().getTime();
 
   onSaveOrder()
   {
-    console.log("orderForm----",this.orderForm.value)
 
     this.postservice.addOrder(this.orderForm.value).subscribe((result)=>{
       if(result){
@@ -133,13 +114,12 @@ var now = new Date().getTime();
       }
     })
 
-
     this.detailclose()
   }
 
   orderQuantity(value)
   {
-    console.log(">>>>> - ",this.data?.id)
+    
     this.orderForm.controls.prodname.patchValue(this.data?.name);
     this.orderForm.controls.prodid.patchValue("kfdmgdk4353434");
     this.orderForm.controls.image.patchValue(this.data?.image);

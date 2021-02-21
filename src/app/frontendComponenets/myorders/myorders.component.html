@@ -1,28 +1,26 @@
-<div class="myorder-body">
+<div style="width: 100%; height: 700px; background-color: lightgray;"  *ngIf="isloading">
+<div style="top: 40%; left: 45%; position:fixed;">
+  <img src="../assets/images/index.svg" style="width:100px; height:100px">
+</div>
+</div>
+
+
+<div class="myorder-body"  *ngIf="!isloading">
     <div class="outer-layout">
 
        <div class="order-text">  <h2>My Orders</h2> </div>
 
-       <div class="card-layout"> 
-          
-        
-
+  <div class="card-layout"> 
   <div class="container-fluid">
     
-    <div class="row cards"  id="demo2"  *ngFor="let item of productOrders">
+    <div class="row cards" *ngFor="let item of productOrders" style="margin-top: 35px;">
 
       <div class="col-sm-4 col-md-4 col-lg-4 ">
-     
-          <div class="imagediv"> <img [src]="item.image"  class="image" alt="{{ item.name}}">
-           
-          </div>
-          
-      
+          <div class="imagediv"> <img [src]="item.image"  class="image" alt="{{ item.name}}"></div> 
       </div>
 
       <div class="col-sm-4 col-md-4 col-lg-4" >
-   
-            <div> 
+           <div> 
               <span class="head-text"> Product name</span>
               <h5> {{ item.prodname}} </h5>
 
@@ -45,12 +43,11 @@
             <h4>21 March 2021</h4>
            </div>
 
-           <button class="btn btn-danger" style="margin-top: 30px;" (click)="deleteItem(item._id)" >cancel order</button>
-     
+           <button class="btn btn-danger" style="margin-top: 30px;" (click)="deleteItem(item._id)" >
+            <!-- <i class="fas fa-window-close"></i> -->
+            <span class="alert-icon" style="margin-right: 5px; size: 20px;" >&times;</span>
+            cancel order</button>
       </div>
-
-
-
 
       <div class="no-filter" *ngIf="productOrders.length == 0">  <h1>No orders</h1> </div>
     </div>

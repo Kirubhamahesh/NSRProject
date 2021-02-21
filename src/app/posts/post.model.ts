@@ -2,7 +2,7 @@ export interface Post{
     id:string;
     type:string;
     name:string;
-    image:string;
+    imagePath:string;
     estimatedprice:string;
     price:string;
     fabric:string;

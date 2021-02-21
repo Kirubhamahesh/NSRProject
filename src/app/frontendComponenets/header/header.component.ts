@@ -19,8 +19,6 @@ export class HeaderComponent implements OnInit {
   topofkidarea = 0;
   toggle=false
  
-  
-
   @HostListener("window:scroll", ["$event"])
   onWindowScroll() {
   console.log(document.documentElement.scrollTop);
@@ -31,15 +29,12 @@ if(document.documentElement.scrollTop >=75 && document.documentElement.scrollTop
 
 } }
 
-
   gotohome()
   {
     this.dataservice.setheaderStyle('womens');
     window.scrollTo(0,0);
     this.router.navigate(['gotoproduct'])
   }
-
-
 
   ngOnInit(): void {
   }
@@ -51,8 +46,6 @@ if(document.documentElement.scrollTop >=75 && document.documentElement.scrollTop
   var winScroll = document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 100;
-  
-  // console.log("Scroll %", scrolled);
   document.getElementById("scrollBar").style.width = scrolled + "%";
   }
 

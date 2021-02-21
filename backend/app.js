@@ -30,6 +30,7 @@ app.use((req, res, next) => {
     "Access-control-Allow-Methods",
     "GET,POST,PUT,PATCH,DELETE, OPTIONS"
   );
+  // console.log("response",res)
   next();
 });
 

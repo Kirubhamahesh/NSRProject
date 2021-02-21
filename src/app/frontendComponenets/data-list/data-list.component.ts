@@ -17,22 +17,23 @@ export class DataListComponent implements OnInit
   list:string;
   private subscription: Subscription;
   private headsubscription: Subscription;
-
   currentActive = 'Home';
  
   constructor(private httpClient: HttpClient,private router: Router,private route: ActivatedRoute,private dataservice: Dataservice,private postservice: PostsService){}
 
   currreq = 'womens'
   requiredProducts: any = [];
-
+  isloading = true
   mensarray = []
   womensarray = []
   kidsarray = []
 
   ngOnInit(){
   
+     
       this.postservice.getPosts().subscribe((value)=>
     {
+      this.isloading = false
       this.products = value.data
        console.log("getpost in data lis",this.products)
 
@@ -83,11 +84,6 @@ export class DataListComponent implements OnInit
           console.log(this.requiredProducts)
           this.dataservice.setrequiredProducts(this.requiredProducts)
         })
-
-      
-    
-
-
   }
   
   value: { number: number; name: string; }

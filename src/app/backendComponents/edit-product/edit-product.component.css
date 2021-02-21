@@ -140,3 +140,16 @@ input[type="file"]{
 {
   margin-top: 74px;
 }
+
+.details-block
+{
+    
+    display: flex;
+    justify-content: center; 
+}
+
+.max-width-container
+{
+    max-width: 1640px;
+    margin: 0 auto;
+}

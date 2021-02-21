@@ -18,24 +18,21 @@ export class MainComponent  {
     config.keyboard = false;
   }
 
-
   @HostListener("window:scroll", ["$event"])
   onWindowScroll() {
-if(document.documentElement.scrollTop >=750) {
+  if(document.documentElement.scrollTop >=750) {
   this.value = true;
    }
-else
-{
+  else
+  {
   this.value = false;
-}
-}
+  }
+  }
 
-
-    gototop()
-    {
-      window.scrollTo(0,0);
-    }
+  gototop()
+  {
+    window.scrollTo(0,0);
+  }
    
-    
   }
   

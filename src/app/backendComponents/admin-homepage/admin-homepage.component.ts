@@ -20,10 +20,33 @@ export class AdminHomepageComponent implements OnInit {
   "Kids",
   
   ]
+  productOrders = []
+  userDatas =[]
   @Output() selectedDevice= new EventEmitter()
   members=[];
   ngOnInit() {
   this.members=[...this.members,...this.list.slice(0,10)]
+
+
+  this.postservice.getOrderdatas().subscribe((value)=>
+  {
+   
+    this.productOrders = value.data
+    
+  })
+
+
+  console.log("userdatas  ?????")
+  this.postservice.getUsers().subscribe((value)=>
+  {
+   
+    console.log("userdatas",value.data)
+    this.userDatas = value.data
+    
+  })
+
+
+
   }
   onScroll(event){
   const tableViewHeight = event.target.offsetHeight;
@@ -38,6 +61,7 @@ export class AdminHomepageComponent implements OnInit {
   onNavClick(value){
 
     this.dataservice.setsideheaderStyle(value)
+    this.router.navigate(["prodlist"])
   
   }
 
@@ -46,6 +70,16 @@ export class AdminHomepageComponent implements OnInit {
     this.router.navigate([value]);
   }
 
-  
+  navigateToCustomerList()
+  {
+    this.router.navigate(["view-user"]);
+  }
+
+  navigateToOrderList()
+  {
+    this.router.navigate(["view-order"]);
+  }
+
+
 
   }

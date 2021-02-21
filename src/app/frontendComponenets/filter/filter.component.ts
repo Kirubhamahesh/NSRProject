@@ -77,9 +77,6 @@ export class FilterComponent implements OnInit , OnDestroy{
       this.duplicateFilterarray = value
     })
 
-   
-
-    
    }
 
   detailClose()
@@ -96,7 +93,6 @@ export class FilterComponent implements OnInit , OnDestroy{
 
   filterApply()
   {
-  console.log("filterApply--","org arr",this.duplicateFilterarray,"selected item",this.SelectedItemByType)
   this.SelectedItemByType.forEach((item)=>
   {
     this.duplicateFilterarray.forEach((product)=>
@@ -107,16 +103,11 @@ export class FilterComponent implements OnInit , OnDestroy{
 
   })  
  
-  console.log("FilterarrayByType",this.FilterarrayByType)
-
   if((this.FilterarrayByType.length == 0) && (this.SelectedItemByType.length == 0))
   this.FilterarrayByType = this.duplicateFilterarray
 
-    console.log("FilterarrayByType af  if",this.FilterarrayByType) 
-
   this.FilterarrayByType.forEach((item)=>
   {
-  
     this.temper = +item.estimatedprice.toString().substring(1)
     console.log(this.temper,this.min,this.max)
     if(this.temper >= +this.min && this.temper <= +this.max)
@@ -125,7 +116,6 @@ export class FilterComponent implements OnInit , OnDestroy{
       this.FinalFilterarray.push(item)
     }
   })
-  console.log("final arr",this.FinalFilterarray);
   this.dataservice.setFilteredDatas(this.FinalFilterarray);
   this.modalService.dismissAll();
   this.duplicateFilterarray = []
@@ -151,8 +141,6 @@ export class FilterComponent implements OnInit , OnDestroy{
     this.SelectedItemByType.push(item.content)
     else
     this.SelectedItemByType.splice(this.SelectedItemByType.indexOf(item),1)
-
-    console.log("SelectedItemByType",this.SelectedItemByType)
   }
 
  
@@ -198,7 +186,7 @@ export class FilterComponent implements OnInit , OnDestroy{
    
     if(str == 'min')
     {
-    console.log("a")
+   
     if(this.min > this.max)
     {
       this.tempvar = this.min
@@ -213,10 +201,7 @@ export class FilterComponent implements OnInit , OnDestroy{
     }
     else
     this.dropdatamin = this.signupform.controls.rangeone.value;
-
     }
-
-
     else
     {
       
@@ -260,10 +245,12 @@ export class FilterComponent implements OnInit , OnDestroy{
     this.SelectedItemByType = []
     this.FinalFilterarray = []
     this.FilterarrayByType = []
+   
     this.dropdatamax = this.dropdowntwo[5]
     this.dropdatamin =  this.dropdownone[0]
-    this.rangeone = this.dropdownone[0]
-    this.rangetwo = this.dropdowntwo[5]
+   
+    this.signupform.controls.rangeone.setValue(this.dropdownone[0]);
+    this.signupform.controls.rangetwo.setValue(this.dropdowntwo[5]);
    for(let i=0;i< this.FilterTypeProd.length;i++)
    {
      this.FilterTypeProd[i].status = false
@@ -277,8 +264,6 @@ export class FilterComponent implements OnInit , OnDestroy{
     this.subscription.unsubscribe();
     
    }
-
-
   }
 
 

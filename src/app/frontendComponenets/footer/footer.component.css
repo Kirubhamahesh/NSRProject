@@ -24,4 +24,33 @@ hr{
     color: #00BFFF;
 }
 
+.list-group-item-order
+{
+    border: none;
+    background-color: orange;
+    list-style-type: none;
+}
 
+
+.desktop-column
+{
+    margin:50px 120px
+}
+@media only screen and (max-width: 767px) {
+    
+.desktop-column
+{
+    margin:5px 12px
+}
+
+.ach-text
+{
+    width: 240px;
+}
+
+}
+
+.ach-text
+{
+width: 400px;
+}

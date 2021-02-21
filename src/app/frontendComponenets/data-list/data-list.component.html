@@ -1,7 +1,14 @@
 <app-carousel></app-carousel>
 
 
-<div class="bodystyle" >
+<div style="width: 100%; height: 700px; background-color: lightgray;"  *ngIf="isloading">
+  <div style="top: 40%; left: 45%; position:fixed;">
+    <img src="../assets/images/index.svg" style="width:100px; height:100px">
+  </div>
+  </div>
+
+
+<div class="bodystyle" *ngIf="isloading == false">
 
   <div class="icon-bar">
     <a href="#" class="facebook"><i class="fa fa-facebook"></i></a> 
@@ -23,7 +30,7 @@
         <div class="col-sm-12 col-md-4 col-lg-4 division" *ngFor="let item of requiredProducts">
         <div class="cards">
             <div class="imagediv"> <img [src]="item.image"  class="image" alt="{{ item.name}}">
-              <div class="top-right" *ngIf="item.extrainfo">offer</div>
+              <div class="top-right" *ngIf="item.extrainfo != 'Nil'">{{item.extrainfo}}</div>
             </div>
             <div> 
               <h6>{{ item.name}}</h6>
@@ -35,13 +42,11 @@
            </div>
         </div>
 
-        <!-- <div class="no-filter" *ngIf="requiredProducts.length == 0">  <h1>No filter found</h1> </div> -->
+        <div class="no-filter" *ngIf="requiredProducts.length == 0">  <h1>No filter found</h1> </div>
       </div>
     </div></div>
 
-    <!-- <div *ngIf="datadetail">
-      <app-data-detail></app-data-detail>
-    </div> -->
+
 
 
 

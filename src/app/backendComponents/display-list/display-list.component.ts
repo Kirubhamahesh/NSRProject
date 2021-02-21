@@ -28,8 +28,12 @@ export class DisplayListComponent implements OnInit {
   kidsarray = []
 
   ngOnInit(){
+        this.getdata();
+       }
   
-      this.postservice.getPosts().subscribe((value)=>
+  getdata()
+  {
+    this.postservice.getPosts().subscribe((value)=>
     {
       this.products = value.data
        console.log("getpost in data lis",this.products)
@@ -59,8 +63,8 @@ export class DisplayListComponent implements OnInit {
           
         })
     })
+
   }
-  
 
   editproduct(obj)
   {
@@ -69,7 +73,17 @@ export class DisplayListComponent implements OnInit {
   }
 
   
-  
+  deleteItem(id)
+  {
+   
+    this.postservice.deleteProd(id).subscribe((resp)=>
+    {
+      this.getdata();
+     console.log("deleted")  
+      })
+   
+  }
+
 
   ngOnDestroy(): void {
     // this.subscription.unsubscribe();

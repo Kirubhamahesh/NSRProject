@@ -1,7 +1,7 @@
 .myorder-body
 {
     background-color: #ecf0f1;
-    margin-top: 58px;
+    /* margin-top: 18px; */
 }
 
 .order-text
@@ -13,20 +13,16 @@
 .card-layout
 {
     margin : 5px 25px;
-    background-color: white;
     box-shadow: 0 10px 40px 0 #B0C1D9;
     border-radius: 2px;
 }
 
-
-
-
-
 .cards
 {
+    background-color: white;
     box-shadow: 1px 1.5px  1px 1px lightgray;
     padding: 20px 40px;
-    margin-top: 50px;   
+    margin-top: 25px;   
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .image
@@ -41,11 +37,8 @@
     overflow: hidden; 
     transition: 0.5s all ease-in-out; 
 }
-
-
 .head-text
 {
     font-variant: normal;
     color: gray;
-    /* font-family: sans-serif; */
 }

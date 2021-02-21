@@ -1,0 +1,50 @@
+.table{
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0 8px;
+    }
+  
+    .table-header-row{
+    background-color: #ECF4FB;
+    }
+    
+    .table-header-column{
+    color: #36424A;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    padding:10px;
+    text-align: left;
+    }
+  
+    .table-row{
+    background-color: #FFFFFF;
+    }
+  
+    .table-column{
+    color: #36424A;
+    font-size: 14px;
+    line-height: 24px;
+    padding:10px;
+    text-align: left;
+    }
+  
+    .table-chevron{
+    color: #0072CF;
+    width: 24px;
+    height: 24px;
+    }
+  
+    .filter-block
+    {
+      background-color: white;
+    }
+  
+    .selected-filter-heading
+    {
+      color: #00204E;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 24px;
+      text-align: center;
+    }

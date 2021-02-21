@@ -24,6 +24,8 @@ import { PostsService } from './posts/posts.service';
 import { FooterComponent } from './frontendComponenets/footer/footer.component';
 import { ProductDetailComponent } from './frontendComponenets/product-detail/product-detail.component';
 import { AdminheaderComponent } from './backendComponents/adminheader/adminheader.component';
+import { CustomerOrderListComponent } from './backendComponents/customer-order-list/customer-order-list.component';
+import { CustomerListComponent } from './backendComponents/customer-list/customer-list.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AdminheaderComponent } from './backendComponents/adminheader/adminheade
     FooterComponent,
     ProductDetailComponent,
     AdminheaderComponent,
+    CustomerOrderListComponent,
+    CustomerListComponent,
   ],
   imports: [
     BrowserModule,

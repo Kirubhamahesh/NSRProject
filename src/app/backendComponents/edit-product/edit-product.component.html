@@ -1,8 +1,8 @@
 <app-adminheader></app-adminheader>
-<div class="container edit-prod">
+<div class="container edit-prod details-block">
     <div class="detail-right"> 
      <div class="form-group">
-       <h3 class="Form-heading"> Product details form</h3>
+      
          <form [formGroup]="postForm" (ngSubmit)="onSavePost()">
 
                  <label for="name" class="label-heading">Product name</label>
@@ -10,7 +10,7 @@
                  <label for="imagePath" class="label-heading">Product type</label>
                  <input type="text" id="imagePath" class="form-control" formControlName="type"/>
 
-                 <button mat-stroked-button type="button" (click)="filepicker.click()">
+                 <button mat-stroked-button type="button" (click)="filepicker.click()" class="btn btn-primary" style="margin: 10px;">
                   Pick Image
                 </button>
                 <input type="file" #filepicker (change)="onImagePicked($event)"/>
@@ -38,6 +38,8 @@
                  <input type="text"  id="name" class="form-control" formControlName="fabric"/>
                  <button class="btnclass" 
                  type="submit"
+                 style="margin-top: 20px;"
+                 class="btn btn-primary"
                  [disabled]="!postForm.valid" >
                  Save
                </button>

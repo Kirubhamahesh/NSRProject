@@ -1,6 +1,7 @@
 const express = require("express");
 const Post = require("../models/post");
 const Order = require("../models/order");
+const User = require("../models/users");
 
 const multer = require("multer");
 
@@ -26,18 +27,20 @@ const storage = multer.diskStorage({
     cb(null, name + "-" + Date.now() + "." + ext);
   }
 });
+
 router.post(
   "",
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
-    console.log(url);
-    console.log("req body",req.body.type)
+    console.log("url",url);
+    //  console.log("req body",req)
     const post = new Post({
       
       type: req.body.type,
       name:req.body.name,
-       image: url + "/images/" + req.file.filename,
+      // image : "image",
+        image: url + "/images/" + req.file.filename,
       estimatedprice:req.body.estimatedprice,
       price:req.body.price,
       fabric:req.body.fabric,
@@ -75,8 +78,6 @@ router.post(
       prodid:req.body.prodid,
       image:req.body.image,
       contactNumber:req.body.contactNumber,
-
-
     });
     post.save().then(createdPost => {
       console.log("createdPost",createdPost);
@@ -90,8 +91,6 @@ router.post(
     });
   }
 );
-
-
 
 router.post(
   "/user",
@@ -109,19 +108,15 @@ router.post(
     post.save().then(createdPost => {
       console.log("createdPost",createdPost);
       res.status(201).json({
-        message: "user added successfully!",
-        post: {
-          ...createdPost,
-          id: createdPost._id
-        }
+        message: "user added successfully!"
+        // post: {
+        //   ...createdPost,
+        //   id: createdPost._id
+        // }
       });
     });
   }
 );
-
-
-
-
 
 router.get("", (req, res, next) => {
    
@@ -130,11 +125,26 @@ router.get("", (req, res, next) => {
     postQuery.then(documents=>
       {
         fetchedPosts = documents
-        console.log("fetchedPosts",fetchedPosts)
+        // console.log("fetchedPosts",fetchedPosts)
         res.status(200).json({data : fetchedPosts})
       })
 
     });
+
+
+    router.get("/users", (req, res, next) => {
+   
+      const postQuery=User.find()
+      let fetchedPosts;
+      postQuery.then(documents=>
+        {
+          fetchedPosts = documents
+          // console.log("fetchedPosts",fetchedPosts)
+          res.status(200).json({data : fetchedPosts})
+        })
+  
+      });
+
 
 
     
@@ -145,52 +155,77 @@ router.get("/order", (req, res, next) => {
   postQuery.then(documents=>
     {
       fetchedPosts = documents
-      console.log("fetchedPosts",fetchedPosts)
+      // console.log("fetchedPosts",fetchedPosts)
       res.status(200).json({data : fetchedPosts})
     })
 
   });
     
-  router.get("/:id", (req, res, next) => {
+  // router.get("/:id", (req, res, next) => {
 
-    console.log("id updated")
-    Post.findById({ _id: req.params.id }).then(post => {
-      if (post) {
-        res.status(200).json(post);
-      } else {
-        res.status(404).json({ message: "page not found!" });
-      }
-    });
-  });
+  //   console.log("id updated")
+  //   Post.findById({ _id: req.params.id }).then(post => {
+  //     if (post) {
+  //       res.status(200).json(post);
+  //     } else {
+  //       res.status(404).json({ message: "page not found!" });
+  //     }
+  //   });
+  // });
 
   
+  router.put(
+    "/:id",
+    multer({ storage: storage }).single("image"),
+    (req, res, next) => {
+      console.log("url",req)
+      let imagePath = req.body.imagePath;
+       if (req.file) {
+        console.log("url")
+        const url = req.protocol + "://" + req.get("host");
+        imagePath = url + "/images/" + req.file.filename;
+       }
+      const post = new Post({
+      
+        _id : req.params.id,
+        type: req.body.type,
+        name:req.body.name,
+        // image : "image",
+        imagePath: imagePath,
+        estimatedprice:req.body.estimatedprice,
+        price:req.body.price,
+        fabric:req.body.fabric,
+        clothtype:req.body.clothtype,
+        description:req.body.description,
+        extrainfo:req.body.extrainfo,
+        color:req.body.color,
+      });
+
+      Post.updateOne({ _id: req.params.id }, post).then(result => {
+        res.status(200).json({ message: "updated!" });
+      });
+    }
+  );
+
+
+  router.delete("/prod/:id", (req, res, next) => {
+    console.log("backed",req.params.id)
+    Post.deleteOne({ _id: req.params.id }).then(() => {
+      res.status(200).json({ message: "deleted!" });
+    });
+  
   router.delete("/:id", (req, res, next) => {
-    console.log(req.params.id)
+    console.log("backed",req.params.id)
     Order.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "deleted!" });
     });
   });
 
-  // router.put(
-  //   "/:id",
-  //   multer({ storage: storage }).single("image"),
-  //   (req, res, next) => {
-  //     let imagePath = req.body.imagePath;
-  //     if (req.file) {
-  //       const url = req.protocol + "://" + req.get("host");
-  //       imagePath = url + "/images/" + req.file.filename;
-  //     }
-  //     const post = new Post({
-  //       _id: req.params.id,
-  //       title: req.body.title,
-  //       content: req.body.content,
-  //       imagePath: imagePath
-  //     });
-  //     Post.updateOne({ _id: req.params.id }, post).then(result => {
-  //       res.status(200).json({ message: "updated!" });
-  //     });
-  //   }
-  // );
+   
+  
+  });
+
+
 
 
 module.exports = router;

@@ -48,21 +48,14 @@ export class EditProductComponent implements OnInit {
    
     this.dataservice.geteditdata().subscribe((value)=>
     {
+      if(value)
+      this.createmode = false
+
       this.data = value
-      console.log("subscribed",this.data)
+      console.log("edit subscribed",this.data)
     })
 
 
-    //  this.route.params.subscribe((params: Params)=>
-    // {
-    //  this.id = params['id'];
-    //  this.type = params['type']
-    //  this.createmode = false
-    //  this.postId = params['id'];
-    //  console.log("----AAAA---",this.id,this.type,this.products)
-    //  this.data = this.dataservice.getProduct(this.id)
-     
-    // })
 
       this.postForm = this.formBuilder.group({
       // id: ["", Validators.required],
@@ -82,46 +75,30 @@ export class EditProductComponent implements OnInit {
      this.postForm.patchValue(this.data)
 
 
-
-    // this.route.paramMap.subscribe(paramMap=>{
-    //   this.isLoading=true
-    //   if(paramMap.has('postId')){
-    //     this.mode='edit'
-    //      this.postId=paramMap.get('postId')
-    //     this.postservice.getPost(this.postId).subscribe(post=>{
-    //       this.isLoading=false
-    //       this.post=post
-    //       this.postForm.patchValue(this.post)
-    //       this.postForm.patchValue({image:this.post.image})
-    //       this.imagePreview=post.image
-    //     });
-    //   }else{
-    //     this.mode='create'
-    //     this.isLoading=false
-    //   }
-    // })
    }
 
-  
-
-  
-
-
+ 
   onSavePost(){
     
 
     if(this.createmode){
+      this.createmode = false
+      console.log("in post mode")
       this.postservice.addPost(this.postForm.value).subscribe((result)=>{
         if(result){
-          this.router.navigate(["/"])
+          this.router.navigate([""])
         }
       })
 
     }
     else{
+      console.log("in update",this.postForm.value)
+      this.createmode = true
+      console.log(this.data._id)
+      this.postId = this.data._id
       this.postservice.updatePost(this.postId,this.postForm.value).subscribe((result)=>{
         if(result){
-          this.router.navigate(["/"])
+          this.router.navigate([""])
         }
       })
 
@@ -135,16 +112,15 @@ export class EditProductComponent implements OnInit {
 
 
     onImagePicked(event:Event){
-     const file=(event.target as HTMLInputElement).files[0];
-     this.postForm.patchValue({image:file});
-     this.postForm.get('image').updateValueAndValidity();
-     const reader=new FileReader()
-     reader.onload=()=>{
-       this.imagePreview=reader.result as string
-     }
-     reader.readAsDataURL(file)
-   }
-    
+      const file=(event.target as HTMLInputElement).files[0];
+      this.postForm.patchValue({image:file});
+      this.postForm.get('image').updateValueAndValidity();
+      const reader=new FileReader()
+      reader.onload=()=>{
+        this.imagePreview=reader.result as string
+      }
+      reader.readAsDataURL(file)
+    }
    
 
     }
